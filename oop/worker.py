@@ -42,7 +42,7 @@ class Boss:
             if not isinstance(worker, Worker):
                 raise InvalidWorker(worker)
         self._workers = new_workers
-    
+
     def __call__(self, data: list[tuple[int]]) -> list[float|int]:
         workers_data = []
         for numb, pow in data:

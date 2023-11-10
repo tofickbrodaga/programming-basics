@@ -25,5 +25,5 @@ class Team:
                 raise PlayerNotAdult(f'Упс попался по 228')
         self.__footballer = new_players
 
-egorka = Footballer('Egorka', 10)
+egorka = Footballer('Egorka', 18)
 egorkins = Team([egorka] * 11)
