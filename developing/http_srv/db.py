@@ -3,7 +3,7 @@ import os
 import psycopg
 from dotenv import load_dotenv
 
-from config import CITIES_SELECT, CITIES_INSERT
+from config import CITIES_SELECT, CITIES_INSERT, CITIES_DELETE_BY_NAME, CITIES_COORD_BY_CITY
 
 
 def connect() -> tuple[psycopg.Connection, psycopg.Cursor]:
@@ -33,3 +33,14 @@ def add_city(cursor: psycopg.Cursor, connection: psycopg.Connection, city: tuple
     cursor.execute(CITIES_INSERT, params=city)
     connection.commit()
     return bool(cursor.rowcount)
+
+
+def delete_city(cursor: psycopg.Cursor, connection: psycopg.Connection, city_name: str) -> bool:
+    cursor.execute(CITIES_DELETE_BY_NAME, params=(city_name,))
+    connection.commit()
+    return bool(cursor.rowcount)
+
+
+def coordinates_by_city(cursor: psycopg.Cursor, city_name: str) -> tuple[float]:
+    cursor.execute(CITIES_COORD_BY_CITY, params=(city_name,))
+    return cursor.fetchone()
